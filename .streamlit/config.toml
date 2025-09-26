@@ -1,0 +1,7 @@
+[theme]
+primaryColor = "#000000"          # black (used for buttons, highlights)
+backgroundColor = "#FFFFFF"       # white background
+secondaryBackgroundColor = "#F5F5F5"  # light gray for sidebar/cards
+textColor = "#000000"             # black text
+font = "sans serif"               # clean font
+
