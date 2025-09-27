@@ -298,6 +298,63 @@ server.quit()
 
 
 
+
+proposal = {
+            'proposal': 1,
+            'amount': 1,  # Stake $10
+            'basis': 'stake',  # Stake-based contract
+            'contract_type': 'ONETOUCH',  # Predict price goes up
+            'currency': 'USD',
+            'duration': 15,  # 15 minutes
+            'duration_unit': 'm',  # Minutes (common for forex)
+            'symbol':'R_75',  # EUR/USD forex pair
+            'req_id': 2,
+            "barrier":"+20"
+        }
+
+
+
+
+async def send_proposal():
+   async with websockets.connect(deriv_url) as web:
+      web.send(json.dumps(authorize))
+      web.recv()
+      await web.send(json.dumps(proposal))
+
+      response=await(web.recv())
+
+
+
+      if response.get("error")==None:
+         print('propposal for eurusd')
+         print(response['proposal'])
+      else:
+         print(response.get("error"))    
+
+      proposal_id = response['proposal']['id']
+      ask_price = response['proposal']['ask_price']
+        # Step: Buy the contract
+      buy_msg = {
+            'buy': proposal_id,
+            'price': ask_price,
+            'req_id': 3
+        }
+
+
+      print(buy_msg)
+
+      web.send(json.dumps(buy_msg))
+
+      response=web.recv()
+
+
+ 
+
+asyncio.run(main=send_proposal())
+
+
+
+
 st.rerun()
 
 
