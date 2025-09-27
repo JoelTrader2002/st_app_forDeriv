@@ -1,4 +1,6 @@
 import streamlit as st
+import smtplib
+from email.mime.text import MIMEText
 
 # displaying text
 
@@ -20,4 +22,33 @@ tab1.title("am good")
 tab2.title("am good perfect")
 
 
-st.page_link("pages/appp.py",label="derv")
+
+
+
+#email parameter 
+sender_email="joelndabila2002@gmail.com"
+receiver_email="joelezekia1234@gmail.com"
+password="nxtg bywk gjhn hogm"
+subject="subject"
+body="my email sent"
+
+# create a text massage
+
+msg=MIMEText(body)
+msg['Subject']=subject
+msg['From']=sender_email
+msg['To']=receiver_email
+
+#set up smtp server
+
+server=smtplib.SMTP("smtp.gmail.com",587)
+server.starttls()
+server.login(user=sender_email,password=password)
+
+#send email
+
+server.sendmail(sender_email,receiver_email,msg.as_string())
+server.quit()
+
+st.rerun()
+

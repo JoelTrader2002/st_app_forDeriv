@@ -9,6 +9,8 @@ import asyncio
 from technical_analysis import indicators as indicator
 from ta import momentum,trend,volatility
 from streamlit_navigation_bar import st_navbar
+import smtplib
+from email.mime.text import MIMEText
 
 #deriv cresidential
 deriv_api_token=st.secrets["deriv_api"]["api"]
@@ -241,7 +243,7 @@ def organize(data):
 organized_dict=organize(res)
 
 
-#st.rerun()
+
 
 data_inPandas=organized_dict['R_50'][300]
 
@@ -267,3 +269,36 @@ figures.update_layout(xaxis_rangeslider_visible=False,
                      )
 
 st.plotly_chart(figures)
+
+
+#email parameter 
+sender_email="joelndabila2002@gmail.com"
+receiver_email="joelezekia1234@gmail.com"
+password="nxtg bywk gjhn hogm"
+subject="subject"
+body="my email sent"
+
+# create a text massage
+
+msg=MIMEText(body)
+msg['Subject']=subject
+msg['From']=sender_email
+msg['To']=receiver_email
+
+#set up smtp server
+
+server=smtplib.SMTP("smtp.gmail.com",587)
+server.starttls()
+server.login(user=sender_email,password=password)
+
+#send email
+
+server.sendmail(sender_email,receiver_email,msg.as_string())
+server.quit()
+
+
+
+st.rerun()
+
+
+
