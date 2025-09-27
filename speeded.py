@@ -230,7 +230,7 @@ def organize(data):
   for item in data:
     symbol=item['echo_req']['ticks_history']
     timeframe=item['echo_req']['granularity']
-    candles=pd.DataFrame(item['candles'])
+    candles=pd.DataFrame(item.get("candles",{}))
     candles['time']=pd.to_datetime(candles['epoch'],unit='s')
 
     if symbol not in mynewDict:
