@@ -30,7 +30,7 @@ sender_email="joelndabila2002@gmail.com"
 receiver_email="joelezekia1234@gmail.com"
 password="nxtg bywk gjhn hogm"
 subject="subject"
-body="my email sent"
+body="my email sent first .py "
 
 # create a text massage
 
