@@ -50,6 +50,8 @@ body="my email sent first .py "
 
 # create a text massage
 
+"""
+
 msg=MIMEText(body)
 msg['Subject']=subject
 msg['From']=sender_email
@@ -65,6 +67,10 @@ server.login(user=sender_email,password=password)
 
 server.sendmail(sender_email,receiver_email,msg.as_string())
 server.quit()
+
+
+
+"""
 
 
 
